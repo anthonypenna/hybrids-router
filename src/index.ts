@@ -1,13 +1,18 @@
 import { Hybrids, html } from 'hybrids'
-import { getCurrentPath } from './util'
-import { Route, HybridRouter } from './interfaces'
+import { getCurrentPath, hash } from './util'
+import { RouterOptions, HybridRouter } from './interfaces'
 
-export function Router(routes: Route[]): Hybrids<HybridRouter> {
+export function Router(options: RouterOptions): Hybrids<HybridRouter> {
   return {
-    routes,
+    mode: options.mode || 'history',
+    routes: options.routes || [],
     currentPath: getCurrentPath(),
     render: host => {
-      const matchingRoute = host.routes.find(route => route.path === host.currentPath)
+      const historyMode = host.mode === 'history'
+      const matchingRoute = historyMode
+        ? host.routes.find(route => route.path === host.currentPath)
+        : host.routes.find(route => hash(route.path) === host.currentPath)
+
       return matchingRoute.component || html``
     }
   }
@@ -15,10 +20,14 @@ export function Router(routes: Route[]): Hybrids<HybridRouter> {
 
 export function push(host: HybridRouter, path: string): void {
   if (window && 'location' in window && 'history' in window) {
+    if (getCurrentPath() === path) return
+
     const { state } = window.history
     const { pathname } = window.location
-    host.currentPath = path
-    window.history.pushState(state, pathname, path)
+    const historyMode = host.mode === 'history'
+
+    host.currentPath = historyMode ? path : hash(path)
+    window.history.pushState(state, pathname, host.currentPath)
 
     window.addEventListener('popstate', () => {
       const currentPath = getCurrentPath()
