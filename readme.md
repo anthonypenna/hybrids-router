@@ -29,6 +29,18 @@ that indicates the route you wish to navigate to.
 
 ## Usage
 
+**Start local development server**
+
+```bash
+$ npm run dev
+```
+
+**Build bundle**
+
+```bash
+$ npm run build
+```
+
 Below is a simple example of how we could setup the Hybrids Router in our application:
 
 ```jsx
