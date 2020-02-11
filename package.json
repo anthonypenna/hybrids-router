@@ -1,0 +1,39 @@
+{
+  "name": "hybrids-router",
+  "version": "0.0.1",
+  "description": "Declarative routing for your Hybrids app.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll --coverage",
+    "dev": "parcel index.html --port 8080",
+    "build": "npm run clean && parcel build src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonypenna/hybrids-router.git"
+  },
+  "keywords": [
+    "hybrids",
+    "webcomponent",
+    "declarative",
+    "router"
+  ],
+  "author": "anthonypenna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthonypenna/hybrids-router/issues"
+  },
+  "homepage": "https://github.com/anthonypenna/hybrids-router#readme",
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0",
+    "parcel": "^1.12.4",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "hybrids": "^4.1.3"
+  }
+}
