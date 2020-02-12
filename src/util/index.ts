@@ -4,3 +4,7 @@ export function getCurrentPath(): string {
     return href.replace(origin, '')
   }
 }
+
+export function hash(path: string): string {
+  return `/#${path}`
+}
