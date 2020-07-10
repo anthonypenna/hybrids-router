@@ -1,6 +1,6 @@
 {
   "name": "hybrids-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Declarative routing for your Hybrids app.",
   "main": "dist/index.js",
   "scripts": {
