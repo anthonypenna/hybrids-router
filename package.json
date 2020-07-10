@@ -2,11 +2,12 @@
   "name": "hybrids-router",
   "version": "1.0.0",
   "description": "Declarative routing for your Hybrids app.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
     "test": "jest --coverage",
-    "test:watch": "jest --watchAll --coverage"
+    "test:watch": "jest --watchAll --coverage",
+    "build": "rollup -c && tsc"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,9 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
+    "rollup": "^2.21.0",
+    "rollup-plugin-terser": "^6.1.0",
+    "rollup-plugin-typescript2": "^0.27.1",
     "ts-jest": "^25.2.0",
     "typescript": "^3.9.6"
   },
