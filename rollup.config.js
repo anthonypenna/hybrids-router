@@ -7,7 +7,7 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
+      format: 'esm',
     },
   ],
   external: [...Object.keys(pkg.dependencies || {})],
