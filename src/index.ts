@@ -8,10 +8,10 @@ const template = (host: HybridRouter) => {
     ? host.routes.find((route) => unhash(route.path) === host.currentPath)
     : host.routes.find((route) => hash(route.path) === host.currentPath);
 
-  return matchingRoute.component || html``;
+  return matchingRoute ? matchingRoute.component : html``;
 };
 
-function Router(options: RouterOptions): Hybrids<HybridRouter> {
+export function Router(options: RouterOptions): Hybrids<HybridRouter> {
   return {
     mode: options.mode || 'history',
     routes: options.routes || [],
@@ -35,5 +35,3 @@ export function push(host: HybridRouter, path: string): void {
   window.history.pushState(state, pathname, host.currentPath);
   window.addEventListener('popstate', () => (host.currentPath = getCurrentPath(window)));
 }
-
-export default Router;

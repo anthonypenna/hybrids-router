@@ -33,7 +33,7 @@ Below is a simple example of how we could setup the Hybrids Router in our applic
 
 ```jsx
 import { html, define } from 'hybrids'
-import Router, { push } from 'hybrids-router'
+import { Router, push } from 'hybrids-router'
 
 const options = {
   mode: 'history',
