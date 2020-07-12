@@ -12,7 +12,7 @@ const template = (host: HybridRouter) => {
 };
 
 export function Router({
-  mode = 'history',
+  mode = 'hash',
   routes = [],
   shadowRoot = true,
 }: RouterOptions): Hybrids<HybridRouter> {
