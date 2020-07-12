@@ -11,12 +11,16 @@ const template = (host: HybridRouter) => {
   return matchingRoute ? matchingRoute.component : html``;
 };
 
-export function Router(options: RouterOptions): Hybrids<HybridRouter> {
+export function Router({
+  mode = 'history',
+  routes = [],
+  shadowRoot = true,
+}: RouterOptions): Hybrids<HybridRouter> {
   return {
-    mode: options.mode || 'history',
-    routes: options.routes || [],
+    mode,
+    routes,
     currentPath: getCurrentPath(window),
-    render: render(template, { shadowRoot: options.shadowRoot }),
+    render: render(template, { shadowRoot }),
   };
 }
 
