@@ -11,11 +11,7 @@ const template = (host: HybridRouter) => {
   return matchingRoute ? matchingRoute.component : html``;
 };
 
-export function Router({
-  mode = 'hash',
-  routes = [],
-  shadowRoot = true,
-}: RouterOptions): Hybrids<HybridRouter> {
+export function Router({ mode = 'hash', routes = [], shadowRoot = true }: RouterOptions): Hybrids<HybridRouter> {
   return {
     mode,
     routes,
@@ -36,6 +32,9 @@ export function push(host: HybridRouter, path: string): void {
   const historyMode = host.mode === 'history';
 
   host.currentPath = historyMode ? unhashed : hashed;
-  window.history.pushState(state, pathname, host.currentPath);
+
+  if (historyMode) window.history.pushState(state, pathname, host.currentPath);
+  else window.location.href = host.currentPath;
+
   window.addEventListener('popstate', () => (host.currentPath = getCurrentPath(window)));
 }
