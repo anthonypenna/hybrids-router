@@ -3,11 +3,13 @@
   "version": "1.0.3",
   "description": "Declarative routing for your Hybrids app.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist/",
+    "clean:bundle": "rm dist/interfaces/index.js && rm dist/types/index.js",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll --coverage",
-    "build": "rollup -c"
+    "build": "npm run clean && tsc --outDir dist/ --declarationDir dist/ --declaration && rollup -c && npm run clean:bundle"
   },
   "repository": {
     "type": "git",
@@ -26,12 +28,13 @@
   },
   "homepage": "https://github.com/anthonypenna/hybrids-router#readme",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^5.0.2",
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
     "rollup": "^2.21.0",
     "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.27.1",
     "ts-jest": "^25.2.0",
+    "tslib": "^2.0.0",
     "typescript": "^3.9.6"
   },
   "dependencies": {
