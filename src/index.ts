@@ -1,22 +1,27 @@
-import { Hybrids, html, render } from 'hybrids';
 import { getCurrentPath, hash, unhash } from './util';
 import { RouterOptions, HybridRouter } from './interfaces';
 
-const template = (host: HybridRouter) => {
-  const historyMode = host.mode === 'history';
-  const matchingRoute = historyMode
-    ? host.routes.find((route) => unhash(route.path) === host.currentPath)
-    : host.routes.find((route) => hash(route.path) === host.currentPath);
+export function createRouter(hybrids: any) {
+  const template = (host: HybridRouter) => {
+    const historyMode = host.mode === 'history';
+    const matchingRoute = historyMode
+      ? host.routes.find((route) => unhash(route.path) === host.currentPath)
+      : host.routes.find((route) => hash(route.path) === host.currentPath);
 
-  return matchingRoute?.component || html``;
-};
+    return matchingRoute?.component || hybrids.html``;
+  };
 
-export function Router({ mode = 'hash', routes = [], shadowRoot = true }: RouterOptions): Hybrids<HybridRouter> {
-  return {
-    mode,
-    routes,
-    currentPath: getCurrentPath(window),
-    render: render(template, { shadowRoot }),
+  return function Router({
+    mode = 'hash',
+    routes = [],
+    shadowRoot = true,
+  }: RouterOptions): hybrids.Hybrids<HybridRouter> {
+    return {
+      mode,
+      routes,
+      currentPath: getCurrentPath(window),
+      render: hybrids.render(template, { shadowRoot }),
+    };
   };
 }
 
