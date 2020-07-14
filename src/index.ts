@@ -8,7 +8,7 @@ const template = (host: HybridRouter) => {
     ? host.routes.find((route) => unhash(route.path) === host.currentPath)
     : host.routes.find((route) => hash(route.path) === host.currentPath);
 
-  return matchingRoute ? matchingRoute.component : html``;
+  return matchingRoute?.component || html``;
 };
 
 export function Router({ mode = 'hash', routes = [], shadowRoot = true }: RouterOptions): Hybrids<HybridRouter> {
